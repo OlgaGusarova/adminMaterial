@@ -7,14 +7,9 @@ const contentReducer = function (state = {}, action) {
   switch (action.type) {
 
     case 'ALL_CONTENT_GET':
-      newState = state;
-      newState = update(newState, {
-        contentData: {
-          $set: action.contentData,
-        }
+      return Object.assign({}, state, {
+          contentData: action.contentData
       });
-      return newState;
-      break;
 
     case 'CONTENT_ACTIVE_CHANGED':
       return Object.assign({}, state, {
@@ -50,40 +45,14 @@ const contentReducer = function (state = {}, action) {
       });
 
     case 'CONTENT_FIELDS_GET':
-      newState = state;
-      newState = update(newState, {
-        fullData: {
-          $set: action.fullData
-        },
-        inner_name: {
-          $set: action.inner_name
-        },
-        translations: {
-          $set: action.translations
-        },
-        sort: {
-          $set: action.sort
-        },
-        active: {
-          $set: action.active
-        },
-        tableTranslit: {
-          $set: action.tableTranslit
-        }
-      });
-
-      return newState;
-      break;
-
-    case 'CONTENT_EDITED':
-      newState = state;
-      newState = update(newState, {
-        contentIsSave: {
-          $set: !newState.contentIsSave
-        }
-      });
-      return newState;
-      break;
+        return Object.assign({}, state, {
+            fullData: action.fullData,
+            inner_name: action.inner_name,
+            translations: action.translations,
+            sort: action.sort,
+            active: action.active,
+            tableTranslit: action.tableTranslit
+        });
 
     default :
       return {
